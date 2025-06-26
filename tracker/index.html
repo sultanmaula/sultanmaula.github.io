@@ -527,22 +527,24 @@
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
 <script>
   // Password Gate Logic
-  const PASSWORD = 'Sult@n354';
+  const PASSWORD_HASH = '$2b$10$cgizB15yQ7PFN2yu21KWNOUQ8oDJpTPGc3gSrxW7AWyrpsCExJqDi';
   const passwordGate = document.getElementById('passwordGate');
   const appContainer = document.getElementById('appContainer');
   const passwordInput = document.getElementById('passwordInput');
   const passwordSubmit = document.getElementById('passwordSubmit');
   const passwordError = document.getElementById('passwordError');
 
-  passwordSubmit.addEventListener('click', () => {
+  passwordSubmit.addEventListener('click', async () => {
     const value = passwordInput.value;
-    if (value === PASSWORD) {
+    const match = await dcodeIO.bcrypt.compare(value, PASSWORD_HASH);
+    if (match) {
       passwordGate.style.display = 'none';
       appContainer.style.display = 'block';
     } else {
@@ -795,8 +797,8 @@
       const filtered = this.transactions.filter(t =>
         t.date.getFullYear() === this.currentYear && t.date.getMonth() === this.currentMonth
       );
-      const income = filtered.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
-      const expenses = filtered.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
+      const income = filtered.filter(t => t.type === 'income').reduce((sum, t) => sum + Number(t.amount), 0);
+      const expenses = filtered.filter(t => t.type === 'expense').reduce((sum, t) => sum + Number(t.amount), 0);
       const balance = income - expenses;
 
       document.getElementById('totalIncome').textContent = this.formatCurrency(income);
