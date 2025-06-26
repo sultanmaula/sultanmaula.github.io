@@ -638,7 +638,7 @@
         this.transactions = data.map(t => ({
           id: t.id,
           type: t.type,
-          amount: t.amount,
+          amount: Number(t.amount),
           description: t.description,
           category: t.category,
           date: new Date(t.date)
@@ -953,7 +953,7 @@
           worksheetData.push([
               t.id,
               t.type,
-              t.amount,
+              Number(t.amount),
               t.description,
               t.category,
               formatLocalDateTime(t.date)
