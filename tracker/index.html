@@ -923,8 +923,8 @@
       const filtered = this.transactions.filter(t => t.date.getFullYear() === this.currentYear && t.date.getMonth() === this.currentMonth);
       filtered.forEach(t => {
         const day = t.date.getDate();
-        if (t.type === 'income') incomeData[day-1] += t.amount;
-        else if (t.type === 'expense') expenseData[day-1] += t.amount;
+        if (t.type === 'income') incomeData[day-1] += Number(t.amount);
+        else if (t.type === 'expense') expenseData[day-1] += Number(t.amount);
       });
       this.chart.data.labels = labels;
       this.chart.data.datasets[0].data = incomeData;
