@@ -1,181 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Sultan Maula</title>
-        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Under Maintenance</title>
+        <!-- Tailwind CSS via CDN -->
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body id="page-top">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">
-                <span class="d-block d-lg-none">Sultan Maula</span>
-                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/img/foto.jpg" alt="..."/></span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">Experience</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Education</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Skills</a></li>
-                    <!-- <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interests</a></li> -->
-                    <!-- <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portofolios">Portofolios</a></li> -->
-                </ul>
+    <body class="bg-gray-100 text-gray-800 min-h-screen flex items-center justify-center p-4">
+        <div class="max-w-4xl w-full mx-auto text-center">
+
+            <!-- Skeleton Loading (Hanya tampil saat loading) -->
+            <div id="skeleton" class="animate-pulse">
+                <div class="h-10 bg-gray-300 rounded-lg mx-auto w-3/4 mb-4"></div>
+                <div class="h-6 bg-gray-300 rounded mx-auto w-1/2 mb-6"></div>
+                <div class="flex justify-center mb-8">
+                    <div class="h-20 w-20 bg-gray-300 rounded-full"></div>
+                </div>
+                <div class="h-4 bg-gray-300 rounded mx-auto w-2/5"></div>
             </div>
-        </nav>
-        <!-- Page Content-->
-        <div class="container-fluid p-0">
-            <!-- About-->
-            <section class="resume-section" id="about">
-                <div class="resume-section-content">
-                    <h2 class="mb-0">
-                        Sultan
-                        <span class="text-primary">Maula Chamzah</span>
-                    </h2>
-                    <!-- <div class="subheading mb-5">
-                        East Java, Indonesia ·
-                        <a href="mailto:sultanmmaulachamzah@gmail.com">sultanmaulachamzah@gmail.com</a>
-                    </div> -->
-                    <p class="lead mb-5">A seasoned software engineer with five years of experience in web application development. Highly skilled in PHP and also proficient in Node.js and Python. Experienced in developing RESTful APIs and implementing them on the frontend side. Well-versed in utilizing Google Cloud Platform (GCP) services such as Google Cloud Function, Google Cloud Storage, and Google Big Query. Additionally, experienced in Docker implementation to support efficient application deployment and management.</p>
-                    <div class="social-icons">
-                        <a class="social-icon" href="mailto:sultanmaulachamzah@gmail.com"><i class="fa fa-envelope"></i></a>
-                        <a class="social-icon" target="_blank" href="https://www.linkedin.com/in/sultanmaula"><i class="fab fa-linkedin"></i></a>
-                        <a class="social-icon" target="_blank" href="https://t.me/sultanmaula"><i class="fab fa-telegram"></i></a>
-                        <a class="social-icon" target="_blank" href="https://www.github.com/sultanmaula"><i class="fab fa-github"></i></a>
-                        <a class="social-icon" target="_blank" href="https://www.gitlab.com/sultanmaula"><i class="fab fa-gitlab"></i></a>
-                    </div>
+
+            <!-- Konten Asli (Sembunyi dulu, muncul setelah loading) -->
+            <div id="content" class="opacity-0 transition-opacity duration-1000 hidden">
+                <h1 class="text-4xl md:text-5xl font-bold text-indigo-600 mb-4">We're Under Maintenance</h1>
+                <p class="text-lg text-gray-600 mb-6">
+                    We're currently performing scheduled maintenance to improve your experience. 
+                    We'll be back online shortly.
+                </p>
+                <!-- <div class="text-sm text-gray-500 mb-8">
+                    Estimated downtime: <span class="font-medium">1-2 hours</span>
+                </div> -->
+
+                <!-- Icon Perawatan -->
+                <div class="flex justify-center mb-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.999.608 2.293.608 3.292 0a1.724 1.724 0 001.065-2.572z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
                 </div>
-            </section>
-            <hr class="m-0" />
-            <!-- Experience-->
-            <section class="resume-section" id="experience">
-                <div class="resume-section-content">
-                    <h2 class="mb-5">Experience</h2>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-2">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Back End Developer</h3>
-                            <div class="subheading mb-3"><a href="https://kly.id" target="_blank">KapanLagi Youniverse</a></div>
-                            <p>KapanLagi Youniverse is a company engaged in digital media and entertainment. Managing several platforms that provide various content, including news, articles, videos, and various other entertainment. I work as a Back End Developer at KapanLagi Youniverse and my main responsibilities are: <br>
-                                ● Designing and creating an optimal RESTful API that allows communication between the server and the front-end of the application.<br>
-                                ● Implementing security measures to protect user data and applications from potential threats.<br>
-                                ● Working with front-end developers to ensure that the application functions properly across platforms.<br>
-                                ● Optimizing servers and databases to minimize loading times and improve user experience.</p>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">July 2021 - Present</span></div>
-                    </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-between mb-2">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Web Developer</h3>
-                            <div class="subheading mb-3">PT. Global Informatika Indonesia</div>
-                            <p>PT. Global Informatika Indonesia (GII) is a company engaged in information technology and IT solutions. This company provides various services such as system integration, software development, and IT infrastructure management to support business and organizational needs. I work as a Web Developer at PT. Global Informatika Indonesia and my main responsibilities are: <br>
-                                ● Creating new features, maintaining websites or web applications.<br>
-                                ● Following agile methodologies as a team such as scrum meetings to ensure weekly task completion.<br>
-                                ● Creating visual elements of the website that interact directly with users, such as buttons, forms, and navigation.<br>
-                                ● Ensuring the website is easy to use and has an intuitive interface.<br>
-                                ● Communicating with the server to retrieve data and display information on web pages using technologies such as AJAX or Fetch API.</p>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">May 2020 - May 2021</span></div>
-                    </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-between">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">Administrator / Webmaster</h3>
-                            <div class="subheading mb-3">Kacangan Clinic</div>
-                            <p>Kacangan Clinic is an inpatient clinic that focuses on general medical care. I work as a Webmaster at Klinik Kacangan and my main responsibilities are:<br>
-                                ● Ensuring the website is running smoothly.<br>
-                                ● Regularly updating content, including text, images, videos, and other elements.<br>
-                                ● Maintaining the security of the website and troubleshooting any issues that may arise.<br>
-                                ● Developing new features or site functions as needed.<br>
-                                </p>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">Jan 2020 - Apr 2020</span></div>
-                    </div>
-                </div>
-            </section>
-            <hr class="m-0" />
-            <!-- Education-->
-            <section class="resume-section" id="education">
-                <div class="resume-section-content">
-                    <h2 class="mb-5">Education</h2>
-                    <div class="d-flex flex-column flex-md-row justify-content-between">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">University of Muhammadiyah Malang</h3>
-                            <div class="subheading mb-3">Bachelor of Electrical Engineering - Telecommunications and Informatics</div>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">2018 - 2022</span></div>
-                    </div>
-                </div>
-            </section>
-            <hr class="m-0" />
-            <!-- Skills-->
-            <section class="resume-section" id="skills">
-                <div class="resume-section-content">
-                    <h2 class="mb-5">Skills</h2>
-                    <div class="subheading mb-3">Programming Languages & Tools</div>
-                    <ul class="list-inline dev-icons">
-                        <li class="list-inline-item"><i class="fab fa-html5"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-css3-alt"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-js-square"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-laravel"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-php"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-node-js"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-python"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-vuejs"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-linux"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-docker"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-gitlab"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-github"></i></li>
-                    </ul>
-                </div>
-            </section>
-            <hr class="m-0" />
-            <!-- Interests-->
-            <!-- <section class="resume-section" id="interests">
-                <div class="resume-section-content">
-                    <h2 class="mb-5">Interests</h2>
-                    <p>Aside from being a web developer, I enjoy most of my time outdoors like photographing buses.</p>
-                    <p class="mb-0">When forced indoors, I watch comedy genre movies or youtube shows, besides I'm also a computer enthusiast, and I spend a lot of my free time exploring the latest technological advances in the world of front-end web development, IoT (Internet of Things), and Microcontroller.</p>
-                </div>
-            </section>
-            <hr class="m-0" /> -->
-            <!-- Awards-->
-            <!-- <section class="resume-section" id="portofolios">
-                <div class="resume-section-content">
-                    <h2 class="mb-5">Portofolios</h2>
-                    <ul class="fa-ul mb-0">
-                        <li>
-                            <span class="fa-li"><i class="fas fa-check text-success"></i></span>
-                            Jawda Coffee | Farm & Roastery Indonesia [<a target="_blank" href="https://jawda.id">www.jawda.id</a>]
-                        </li>
-                        <li>
-                            <span class="fa-li"><i class="fas fa-check text-success"></i></span>
-                            IT Global Services [<a target="_blank" href="https://it-svc.com">www.it-svc.com</a>]
-                        </li>
-                        <li>
-                            <span class="fa-li"><i class="fas fa-check text-success"></i></span>
-                            Elforza | Network Infrastructure Solution for IT-Telco & Data Center [<a target="_blank" href="http://elforza.com">www.elforza.com</a>]
-                        </li>
-                        <li>
-                            <span class="fa-li"><i class="fas fa-check text-success"></i></span>
-                            Usaha Bersama [<a target="_blank" href="http://usahabersama.herokuapp.com">usahabersama.herokuapp.com</a>]
-                        </li>
-                    </ul>
-                </div>
-            </section> -->
+
+                <!-- Kontak -->
+                <p class="text-gray-500 text-sm">
+                    For urgent inquiries, contact us at: 
+                    <a href="mailto:sultanmaulachamzah@gmail.com" class="text-indigo-600 hover:underline">sultanmaulachamzah@gmail.com</a>
+                </p>
+            </div>
+
+            <!-- Footer -->
+            <footer id="footer" class="mt-12 text-gray-400 text-sm opacity-0 transition-opacity duration-1000 hidden">
+                &copy; <span id="current-year"></span> Sultan Maula. All rights reserved.
+            </footer>
         </div>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+
+        <!-- Script: Sembunyikan skeleton & tampilkan konten -->
+        <script>
+            setTimeout(() => {
+                // Sembunyikan skeleton
+                document.getElementById('skeleton').style.display = 'none';
+                
+                // Tampilkan konten dan footer dengan fade-in
+                const content = document.getElementById('content');
+                const footer = document.getElementById('footer');
+                
+                content.classList.remove('hidden');
+                footer.classList.remove('hidden');
+                
+                // Beri jeda kecil agar transisi opacity bekerja
+                setTimeout(() => {
+                    content.style.opacity = 1;
+                    footer.style.opacity = 1;
+                }, 10);
+            }, 1500); // Durasi loading 1.5 detik
+
+            // Update tahun saat ini di footer
+            document.addEventListener('DOMContentLoaded', function() {
+                var currentYear = new Date().getFullYear();
+                document.getElementById('current-year').textContent = currentYear;
+            });
+        </script>
     </body>
 </html>
