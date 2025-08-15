@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Snake — Single HTML</title>
+  <style>
+    :root{
+      --bg:#0b0f16;
+      --panel:#11182a;
+      --panel-2:#0e1524;
+      --accent:#63f2a5;
+      --accent-2:#46c4ff;
+      --text:#e7eefc;
+      --muted:#9bb3d0;
+      --danger:#ff6b7a;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text); background:
+        radial-gradient(1200px 800px at 10% -10%, #1b2b47 0%, #0b0f16 60%),
+        radial-gradient(1000px 600px at 110% 10%, #15233b 0%, rgba(11,15,22,0) 60%),
+        var(--bg);
+      display:grid; place-items:center; padding:20px;
+    }
+    .card{width:min(92vw,720px); box-shadow:var(--shadow); border-radius:var(--radius); background:linear-gradient(180deg,var(--panel),var(--panel-2)); padding:18px; border:1px solid rgba(255,255,255,.06)}
+    header{display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:12px}
+    h1{font-size:22px; letter-spacing:.4px; margin:0; display:flex; align-items:center; gap:10px}
+    h1 .dot{width:10px; height:10px; border-radius:50%; background:radial-gradient(circle at 30% 30%, var(--accent), #1e8f70); box-shadow:0 0 14px 2px rgba(99,242,165,.6)}
+    .hud{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+    .pill{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); padding:6px 10px; border-radius:999px; font-weight:600; color:var(--text);}
+    .pill small{color:var(--muted); font-weight:500}
+
+    .board{display:grid; grid-template-columns:1fr; gap:14px}
+    canvas{display:block; width:min(90vmin,520px); height:min(90vmin,520px); border-radius:20px; background:#0c1220; border:1px solid rgba(255,255,255,.06); box-shadow:inset 0 0 0 1px rgba(255,255,255,.03), 0 20px 40px rgba(0,0,0,.35)}
+
+    .controls{display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center}
+    .left-ctrl{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .btn{appearance:none; border:1px solid rgba(255,255,255,.14); background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); color:var(--text); padding:10px 14px; border-radius:12px; font-weight:700; cursor:pointer; transition:.2s transform ease, .2s border-color ease, .2s box-shadow ease}
+    .btn:hover{transform:translateY(-1px); border-color:rgba(255,255,255,.26)}
+    .btn:active{transform:translateY(0)}
+    .btn.accent{border-color:rgba(99,242,165,.55); box-shadow:0 0 0 3px rgba(99,242,165,.15) inset}
+    .btn.danger{border-color:rgba(255,107,122,.55); box-shadow:0 0 0 3px rgba(255,107,122,.15) inset}
+
+    .select, .check{
+      display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:12px; border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04); color:var(--text)
+    }
+    select{appearance:none; border:none; outline:none; background:transparent; color:var(--text); font-weight:600}
+    option{color:#0b0f16}
+
+    .dpad{display:grid; grid-template-columns:48px 48px 48px; grid-template-rows:48px 48px 48px; gap:8px; justify-content:center; margin-left:auto}
+    .dpad .padbtn{display:grid; place-items:center; border-radius:12px; border:1px solid rgba(255,255,255,.14); background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); color:var(--text); font-weight:900; user-select:none;}
+    .dpad .padbtn:active{transform:translateY(1px)}
+    .pad-empty{opacity:0}
+
+    .tips{color:var(--muted); font-size:12px; margin-top:6px}
+    .credits{margin-top:10px; color:var(--muted); font-size:12px}
+    .kbd{padding:2px 6px; border:1px solid rgba(255,255,255,.2); border-bottom-width:2px; border-radius:6px; background:rgba(255,255,255,.06); font-weight:700}
+
+    @media (max-width:520px){
+      .controls{grid-template-columns:1fr}
+      .dpad{justify-content:flex-start}
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <header>
+      <h1><span class="dot"></span> Snake</h1>
+      <div class="hud">
+        <div class="pill">Skor: <span id="score">0</span></div>
+        <div class="pill"><small>High Score:</small> <span id="hi">0</span></div>
+        <div class="pill"><small>Kecepatan:</small> <span id="speedLabel">Normal</span></div>
+        <div class="pill" id="statePill"><small>Status:</small> <span id="state">Siap</span></div>
+      </div>
+    </header>
+
+    <div class="board">
+      <canvas id="board" width="480" height="480" aria-label="Papan permainan Snake" role="img"></canvas>
+
+      <div class="controls">
+        <div class="left-ctrl">
+          <button id="toggleBtn" class="btn accent">Mulai</button>
+          <button id="restartBtn" class="btn danger">Restart</button>
+          <label class="select">
+            <span>Kecepatan</span>
+            <select id="speed">
+              <option value="6">Pelan</option>
+              <option value="10" selected>Normal</option>
+              <option value="14">Cepat</option>
+              <option value="18">Gokil</option>
+            </select>
+          </label>
+          <label class="check"><input id="wrap" type="checkbox" /> Wrap dinding</label>
+        </div>
+
+        <div class="dpad" aria-label="Kontrol sentuh">
+          <div class="pad-empty"></div>
+          <button class="padbtn" data-dir="up" aria-label="Atas">▲</button>
+          <div class="pad-empty"></div>
+          <button class="padbtn" data-dir="left" aria-label="Kiri">◀</button>
+          <div class="pad-empty"></div>
+          <button class="padbtn" data-dir="right" aria-label="Kanan">▶</button>
+          <div class="pad-empty"></div>
+          <button class="padbtn" data-dir="down" aria-label="Bawah">▼</button>
+          <div class="pad-empty"></div>
+        </div>
+      </div>
+      <div class="tips">Tips: kendalikan dengan <span class="kbd">W</span><span class="kbd">A</span><span class="kbd">S</span><span class="kbd">D</span> atau panah. <span class="kbd">Spasi</span> untuk jeda/lanjut. <span class="kbd">R</span> untuk restart.</div>
+      <div class="credits">Copyright © 2025 Sultan Maula. Made by ChatGPT</div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  // ===== Canvas & DPR setup =====
+  const SIZE = 480; // CSS px
+  const canvas = document.getElementById('board');
+  const ctx = canvas.getContext('2d');
+  function setupCanvas(){
+    const dpr = Math.max(1, window.devicePixelRatio || 1);
+    canvas.width = SIZE * dpr;
+    canvas.height = SIZE * dpr;
+    canvas.style.width = SIZE + 'px';
+    canvas.style.height = SIZE + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // draw in CSS pixels
+  }
+  setupCanvas();
+  window.addEventListener('resize', setupCanvas);
+
+  // ===== Game constants =====
+  const COLS = 24, ROWS = 24;
+  const CELL = SIZE / COLS; // cell size in CSS px
+
+  // Colors
+  const COLORS = {
+    bg: '#0c1220',
+    grid: 'rgba(255,255,255,0.05)',
+    snake: '#63f2a5',
+    snakeBody: '#42c985',
+    headEye: '#0b0f16',
+    foodA: '#46c4ff',
+    foodB: '#7ae1ff',
+    danger: '#ff6b7a'
+  };
+
+  // UI elements
+  const elScore = document.getElementById('score');
+  const elHi = document.getElementById('hi');
+  const elSpeed = document.getElementById('speed');
+  const elSpeedLabel = document.getElementById('speedLabel');
+  const elToggle = document.getElementById('toggleBtn');
+  const elRestart = document.getElementById('restartBtn');
+  const elWrap = document.getElementById('wrap');
+  const elState = document.getElementById('state');
+
+  // Persisted high score
+  let hi = parseInt(localStorage.getItem('snake_highscore') || '0', 10);
+  elHi.textContent = hi;
+
+  // ===== Game state =====
+  let snake, dir, nextDir, food, score, paused, over, wrapWalls, speed, stepMs, acc, last;
+
+  function reset(){
+    snake = [
+      {x: Math.floor(COLS/2), y: Math.floor(ROWS/2)},
+      {x: Math.floor(COLS/2)-1, y: Math.floor(ROWS/2)},
+      {x: Math.floor(COLS/2)-2, y: Math.floor(ROWS/2)}
+    ];
+    dir = {x:1,y:0};
+    nextDir = {x:1,y:0};
+    score = 0; paused = true; over = false; acc = 0; last = performance.now();
+    wrapWalls = !!elWrap.checked;
+    setSpeed(parseInt(elSpeed.value,10));
+    spawnFood();
+    updateHUD();
+    elState.textContent = 'Siap';
+    elToggle.textContent = 'Mulai';
+  }
+
+  function setSpeed(v){
+    speed = v; stepMs = 1000 / speed;
+    elSpeedLabel.textContent = v<=6 ? 'Pelan' : v<=10 ? 'Normal' : v<=14 ? 'Cepat' : 'Gokil';
+  }
+
+  function spawnFood(){
+    let x, y, tries = 0;
+    do{
+      x = Math.floor(Math.random()*COLS);
+      y = Math.floor(Math.random()*ROWS);
+      tries++;
+      if(tries>200) break; // safety
+    } while(snake.some(s=>s.x===x && s.y===y));
+    food = {x,y};
+  }
+
+  function updateHUD(){
+    elScore.textContent = score;
+    if(score>hi){ hi = score; localStorage.setItem('snake_highscore', String(hi)); elHi.textContent = hi; }
+  }
+
+  // Input handling
+  const KEYS = { ArrowUp:'up', ArrowDown:'down', ArrowLeft:'left', ArrowRight:'right', w:'up', a:'left', s:'down', d:'right', W:'up', A:'left', S:'down', D:'right' };
+  window.addEventListener('keydown', e=>{
+    if(KEYS[e.key]){ e.preventDefault(); changeDir(KEYS[e.key]); }
+    else if(e.key===' '){ e.preventDefault(); togglePause(); }
+    else if(e.key==='r' || e.key==='R'){ e.preventDefault(); doRestart(); }
+  }, {passive:false});
+
+  // Touch buttons
+  document.querySelectorAll('.padbtn').forEach(btn=>{
+    btn.addEventListener('click', ()=> changeDir(btn.dataset.dir));
+  });
+
+  // Swipe control
+  let touchStart=null;
+  canvas.addEventListener('touchstart', e=>{ if(e.touches[0]) touchStart={x:e.touches[0].clientX, y:e.touches[0].clientY}; }, {passive:true});
+  canvas.addEventListener('touchmove', e=>{
+    if(!touchStart || !e.touches[0]) return;
+    const dx = e.touches[0].clientX - touchStart.x;
+    const dy = e.touches[0].clientY - touchStart.y;
+    const adx = Math.abs(dx), ady = Math.abs(dy);
+    if(adx>24 || ady>24){
+      if(adx>ady) changeDir(dx>0?'right':'left'); else changeDir(dy>0?'down':'up');
+      touchStart = null;
+    }
+  }, {passive:true});
+
+  function changeDir(name){
+    const map = {up:{x:0,y:-1}, down:{x:0,y:1}, left:{x:-1,y:0}, right:{x:1,y:0}};
+    const nd = map[name];
+    if(!nd) return;
+    // prevent 180° reverse
+    if(nd.x === -dir.x && nd.y === -dir.y) return;
+    nextDir = nd;
+  }
+
+  function togglePause(){
+    if(over){ doRestart(); return; }
+    paused = !paused;
+    elToggle.textContent = paused ? 'Lanjut' : 'Jeda';
+    elState.textContent = paused ? 'Jeda' : 'Main';
+    last = performance.now(); // reset timer gap
+  }
+
+  function doRestart(){ reset(); }
+
+  elToggle.addEventListener('click', togglePause);
+  elRestart.addEventListener('click', doRestart);
+  elSpeed.addEventListener('change', ()=> setSpeed(parseInt(elSpeed.value,10)));
+  elWrap.addEventListener('change', ()=> wrapWalls = !!elWrap.checked);
+
+  // ===== Simple sounds (WebAudio beeps) =====
+  let actx = null;
+  function ensureAudio(){ if(!actx) try{ actx = new (window.AudioContext || window.webkitAudioContext)(); }catch(e){} }
+  function beep(freq=440, dur=0.06, type='sine', gain=0.02){
+    if(!actx) return;
+    const t = actx.currentTime;
+    const o = actx.createOscillator();
+    const g = actx.createGain();
+    o.type = type; o.frequency.value = freq;
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(gain, t + 0.005);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(actx.destination);
+    o.start(t); o.stop(t + dur + 0.02);
+  }
+  canvas.addEventListener('pointerdown', ensureAudio);
+  window.addEventListener('keydown', ensureAudio);
+
+  // ===== Game loop =====
+  function tick(){
+    dir = nextDir; // apply queued direction once per tick
+    let head = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
+
+    if(wrapWalls){
+      head.x = (head.x + COLS) % COLS; head.y = (head.y + ROWS) % ROWS;
+    }
+
+    // Wall collision
+    if(!wrapWalls && (head.x<0 || head.x>=COLS || head.y<0 || head.y>=ROWS)){
+      gameOver(); return;
+    }
+    // Self collision
+    if(snake.some(s=> s.x===head.x && s.y===head.y)){
+      gameOver(); return;
+    }
+
+    snake.unshift(head);
+
+    // Food
+    if(head.x===food.x && head.y===food.y){
+      score += 10; updateHUD(); spawnFood();
+      beep(660, 0.06, 'square', 0.03);
+      // tiny speed up every 50 pts
+      if(score % 50 === 0){ setSpeed(speed + 1); }
+    } else {
+      snake.pop();
+    }
+  }
+
+  function gameOver(){
+    over = true; paused = true;
+    elState.textContent = 'Game Over';
+    elToggle.textContent = 'Main lagi';
+    // sad tone
+    beep(200, 0.12, 'sawtooth', 0.03);
+    setTimeout(()=>beep(160, 0.12, 'sawtooth', 0.03), 120);
+  }
+
+  function drawGrid(){
+    ctx.fillStyle = COLORS.bg;
+    ctx.fillRect(0,0,SIZE,SIZE);
+    ctx.strokeStyle = COLORS.grid; ctx.lineWidth = 1;
+    ctx.beginPath();
+    for(let x=0; x<=COLS; x++){
+      ctx.moveTo(Math.floor(x*CELL)+.5, .5);
+      ctx.lineTo(Math.floor(x*CELL)+.5, SIZE-.5);
+    }
+    for(let y=0; y<=ROWS; y++){
+      ctx.moveTo(.5, Math.floor(y*CELL)+.5);
+      ctx.lineTo(SIZE-.5, Math.floor(y*CELL)+.5);
+    }
+    ctx.stroke();
+  }
+
+  function roundRect(x,y,w,h,r){
+    const rr = Math.min(r, w/2, h/2);
+    ctx.beginPath();
+    ctx.moveTo(x+rr, y);
+    ctx.arcTo(x+w, y, x+w, y+h, rr);
+    ctx.arcTo(x+w, y+h, x, y+h, rr);
+    ctx.arcTo(x, y+h, x, y, rr);
+    ctx.arcTo(x, y, x+w, y, rr);
+    ctx.closePath();
+  }
+
+  function drawSnake(){
+    // body
+    for(let i=snake.length-1; i>=0; i--){
+      const s = snake[i];
+      const x = s.x*CELL, y = s.y*CELL;
+      ctx.fillStyle = i===0 ? COLORS.snake : COLORS.snakeBody;
+      roundRect(x+2, y+2, CELL-4, CELL-4, 6);
+      ctx.fill();
+    }
+    // head eyes
+    const h = snake[0];
+    const hx = h.x*CELL, hy = h.y*CELL;
+    const ex = dir.x===1? 6 : dir.x===-1? -6 : 0;
+    const ey = dir.y===1? 6 : dir.y===-1? -6 : 0;
+    ctx.fillStyle = COLORS.headEye;
+    ctx.beginPath();
+    ctx.arc(hx + CELL/2 - 4 + ex*0.2, hy + CELL/2 - 4 + ey*0.2, 2.2, 0, Math.PI*2);
+    ctx.arc(hx + CELL/2 + 4 + ex*0.2, hy + CELL/2 - 4 + ey*0.2, 2.2, 0, Math.PI*2);
+    ctx.fill();
+  }
+
+  function drawFood(){
+    const x = food.x*CELL, y = food.y*CELL;
+    const r = CELL/2 - 2;
+    const cx = x + CELL/2, cy = y + CELL/2;
+    const g = ctx.createRadialGradient(cx-3, cy-3, 2, cx, cy, r);
+    g.addColorStop(0, COLORS.foodB);
+    g.addColorStop(1, COLORS.foodA);
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI*2);
+    ctx.fill();
+  }
+
+  function drawOverlay(){
+    if(paused || over){
+      ctx.fillStyle = 'rgba(12,18,32,.55)';
+      ctx.fillRect(0,0,SIZE,SIZE);
+      ctx.fillStyle = over ? COLORS.danger : '#ffffff';
+      ctx.font = '700 28px system-ui, -apple-system, Segoe UI, Roboto';
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText(over? 'GAME OVER' : 'PAUSED', SIZE/2, SIZE/2 - 14);
+      ctx.fillStyle = 'rgba(255,255,255,.9)';
+      ctx.font = '600 14px system-ui, -apple-system, Segoe UI, Roboto';
+      ctx.fillText(over? 'Tekan R untuk restart atau tombol “Main lagi”' : 'Spasi untuk lanjut • Arahkan ular ke makanan', SIZE/2, SIZE/2 + 14);
+    }
+  }
+
+  function loop(now){
+    const dt = now - last; last = now;
+    if(!paused && !over){
+      acc += dt;
+      while(acc >= stepMs){ tick(); acc -= stepMs; }
+    }
+    drawGrid();
+    drawFood();
+    drawSnake();
+    drawOverlay();
+    requestAnimationFrame(loop);
+  }
+
+  // Boot
+  reset();
+  requestAnimationFrame(ts=>{ last = ts; requestAnimationFrame(loop); });
+})();
+</script>
+</body>
+</html>
