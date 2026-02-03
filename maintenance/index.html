@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Under Maintenance</title>
+        <!-- Tailwind CSS via CDN -->
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-gray-100 text-gray-800 min-h-screen flex items-center justify-center p-4">
+        <div class="max-w-4xl w-full mx-auto text-center">
+
+            <!-- Skeleton Loading (Hanya tampil saat loading) -->
+            <div id="skeleton" class="animate-pulse">
+                <div class="h-10 bg-gray-300 rounded-lg mx-auto w-3/4 mb-4"></div>
+                <div class="h-6 bg-gray-300 rounded mx-auto w-1/2 mb-6"></div>
+                <div class="flex justify-center mb-8">
+                    <div class="h-20 w-20 bg-gray-300 rounded-full"></div>
+                </div>
+                <div class="h-4 bg-gray-300 rounded mx-auto w-2/5"></div>
+            </div>
+
+            <!-- Konten Asli (Sembunyi dulu, muncul setelah loading) -->
+            <div id="content" class="opacity-0 transition-opacity duration-1000 hidden">
+                <h1 class="text-4xl md:text-5xl font-bold text-indigo-600 mb-4">We're Under Maintenance</h1>
+                <p class="text-lg text-gray-600 mb-6">
+                    We're currently performing scheduled maintenance to improve your experience. 
+                    We'll be back online shortly.
+                </p>
+                <!-- <div class="text-sm text-gray-500 mb-8">
+                    Estimated downtime: <span class="font-medium">1-2 hours</span>
+                </div> -->
+
+                <!-- Icon Perawatan -->
+                <div class="flex justify-center mb-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.999.608 2.293.608 3.292 0a1.724 1.724 0 001.065-2.572z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                </div>
+
+                <!-- Kontak -->
+                <p class="text-gray-500 text-sm">
+                    For urgent inquiries, contact us at: 
+                    <a href="mailto:sultanmaulachamzah@gmail.com" class="text-indigo-600 hover:underline">sultanmaulachamzah@gmail.com</a>
+                </p>
+            </div>
+
+            <!-- Footer -->
+            <footer id="footer" class="mt-12 text-gray-400 text-sm opacity-0 transition-opacity duration-1000 hidden">
+                &copy; <span id="current-year"></span> Sultan Maula. All rights reserved.
+            </footer>
+        </div>
+
+        <!-- Script: Sembunyikan skeleton & tampilkan konten -->
+        <script>
+            setTimeout(() => {
+                // Sembunyikan skeleton
+                document.getElementById('skeleton').style.display = 'none';
+                
+                // Tampilkan konten dan footer dengan fade-in
+                const content = document.getElementById('content');
+                const footer = document.getElementById('footer');
+                
+                content.classList.remove('hidden');
+                footer.classList.remove('hidden');
+                
+                // Beri jeda kecil agar transisi opacity bekerja
+                setTimeout(() => {
+                    content.style.opacity = 1;
+                    footer.style.opacity = 1;
+                }, 10);
+            }, 1500); // Durasi loading 1.5 detik
+
+            // Update tahun saat ini di footer
+            document.addEventListener('DOMContentLoaded', function() {
+                var currentYear = new Date().getFullYear();
+                document.getElementById('current-year').textContent = currentYear;
+            });
+        </script>
+    </body>
+</html>

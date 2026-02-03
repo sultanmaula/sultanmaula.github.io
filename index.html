@@ -1,82 +1,687 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Under Maintenance</title>
-        <!-- Tailwind CSS via CDN -->
-        <script src="https://cdn.tailwindcss.com"></script>
-    </head>
-    <body class="bg-gray-100 text-gray-800 min-h-screen flex items-center justify-center p-4">
-        <div class="max-w-4xl w-full mx-auto text-center">
+<html class="dark" lang="en">
 
-            <!-- Skeleton Loading (Hanya tampil saat loading) -->
-            <div id="skeleton" class="animate-pulse">
-                <div class="h-10 bg-gray-300 rounded-lg mx-auto w-3/4 mb-4"></div>
-                <div class="h-6 bg-gray-300 rounded mx-auto w-1/2 mb-6"></div>
-                <div class="flex justify-center mb-8">
-                    <div class="h-20 w-20 bg-gray-300 rounded-full"></div>
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Sultan Maula Chamzah | Full Stack Developer Portfolio</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <meta content="Professional portfolio of Sultan Maula Chamzah, a seasoned Full Stack Developer with 5+ years of experience in PHP, Laravel, Node.js, and Typescript." name="description" />
+    <meta content="Sultan Maula Chamzah, Full Stack Developer, Indonesia, Web Developer, PHP, Laravel, Node.js, Typescript, Portfolio" name="keywords" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f20df2",
+                        "background-light": "#f8f5f8",
+                        "background-dark": "#221022",
+                        "surface-dark": "#2d1b2d",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #221022;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #392839;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f20df2;
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #f20df2, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-gradient {
+            background: linear-gradient(to right, #f20df2, #a855f7);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-entrance {
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        .animation-delay-100 {
+            animation-delay: 0.1s;
+        }
+
+        .reveal-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden transition-colors duration-300">
+    <header
+        class="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-[#392839] bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+        <div class="max-w-[1280px] mx-auto px-4 sm:px-10 h-16 flex items-center justify-between animate-entrance">
+            <a aria-label="Back to Top"
+                class="group flex items-center transition-transform hover:scale-105 active:scale-95 duration-200"
+                href="#home">
+                <div
+                    class="size-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-primary to-[#a855f7] shadow-lg shadow-primary/30 text-white">
+                    <span class="font-display font-black text-2xl leading-none pt-0.5">S</span>
                 </div>
-                <div class="h-4 bg-gray-300 rounded mx-auto w-2/5"></div>
-            </div>
-
-            <!-- Konten Asli (Sembunyi dulu, muncul setelah loading) -->
-            <div id="content" class="opacity-0 transition-opacity duration-1000 hidden">
-                <h1 class="text-4xl md:text-5xl font-bold text-indigo-600 mb-4">We're Under Maintenance</h1>
-                <p class="text-lg text-gray-600 mb-6">
-                    We're currently performing scheduled maintenance to improve your experience. 
-                    We'll be back online shortly.
-                </p>
-                <!-- <div class="text-sm text-gray-500 mb-8">
-                    Estimated downtime: <span class="font-medium">1-2 hours</span>
-                </div> -->
-
-                <!-- Icon Perawatan -->
-                <div class="flex justify-center mb-8">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.999.608 2.293.608 3.292 0a1.724 1.724 0 001.065-2.572z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                </div>
-
-                <!-- Kontak -->
-                <p class="text-gray-500 text-sm">
-                    For urgent inquiries, contact us at: 
-                    <a href="mailto:sultanmaulachamzah@gmail.com" class="text-indigo-600 hover:underline">sultanmaulachamzah@gmail.com</a>
-                </p>
-            </div>
-
-            <!-- Footer -->
-            <footer id="footer" class="mt-12 text-gray-400 text-sm opacity-0 transition-opacity duration-1000 hidden">
-                &copy; <span id="current-year"></span> Sultan Maula. All rights reserved.
-            </footer>
+            </a>
+            <nav class="hidden md:flex items-center gap-8">
+                <a class="text-sm font-medium hover:text-primary transition-colors" href="#about">About</a>
+                <a class="text-sm font-medium hover:text-primary transition-colors" href="#experience">Experience</a>
+                <a class="text-sm font-medium hover:text-primary transition-colors" href="#freelance">Freelance</a>
+                <a class="text-sm font-medium hover:text-primary transition-colors" href="#skills">Skills</a>
+                <a class="text-sm font-medium hover:text-primary transition-colors"
+                    href="#achievements">Achievements</a>
+                <a class="text-sm font-medium hover:text-primary transition-colors" href="#contact">Contact</a>
+                <button
+                    class="flex items-center justify-center size-9 rounded-lg bg-gray-200 dark:bg-[#392839] hover:text-primary transition-colors"
+                    id="theme-toggle">
+                    <span class="material-symbols-outlined text-[20px]">light_mode</span>
+                </button>
+            </nav>
+            <button class="md:hidden flex items-center justify-center size-9 rounded-lg bg-gray-200 dark:bg-[#392839]">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
         </div>
+    </header>
+    <main class="flex flex-col items-center w-full">
+        <section
+            class="reveal-section w-full max-w-[1280px] px-4 sm:px-10 py-24 md:py-32 flex flex-col items-center text-center gap-8"
+            id="home">
+            <div class="flex flex-col gap-6 max-w-5xl mx-auto">
+                <span class="text-primary font-bold tracking-wider uppercase text-sm">Portfolio</span>
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-black leading-tight tracking-[-0.033em]">
+                    <span class="text-gradient">Sultan Maula Chamzah</span>
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800 dark:text-gray-200">
+                    Full Stack Developer
+                </h2>
+                <div class="flex items-center justify-center gap-2 text-slate-500 dark:text-gray-400 font-medium">
+                    <span class="material-symbols-outlined text-[20px]">location_on</span>
+                    <span>East Java, Indonesia</span>
+                </div>
+                <p
+                    class="text-slate-600 dark:text-gray-300 text-lg md:text-xl font-normal leading-relaxed max-w-[700px] mx-auto mt-4">
+                    Seasoned software engineer with expertise in web application development, PHP, Laravel, Node.js, and modern frameworks.
+                </p>
+            </div>
+            <div class="flex flex-wrap gap-4 justify-center mt-4">
+                <a class="flex items-center justify-center rounded-lg h-12 px-8 bg-primary hover:bg-primary/90 transition-colors text-white text-base font-bold shadow-[0_0_15px_rgba(242,13,242,0.3)]"
+                    href="#experience">
+                    View Work
+                </a>
+                <a class="flex items-center justify-center rounded-lg h-12 px-8 bg-gray-200 dark:bg-[#392839] hover:bg-gray-300 dark:hover:bg-[#4a344a] transition-colors text-slate-900 dark:text-white text-base font-bold"
+                    href="#contact">
+                    Contact Me
+                </a>
+            </div>
+        </section>
+        <section class="reveal-section w-full max-w-[960px] px-4 sm:px-10 py-16 scroll-mt-20" id="about">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 border-l-4 border-primary pl-4">About Me</h2>
+            <div class="bg-surface-light dark:bg-surface-dark rounded-xl p-6 md:p-8 shadow-sm">
+                <p class="text-slate-600 dark:text-gray-300 text-lg leading-relaxed mb-4">
+                    I am a seasoned software engineer with 5+ years of experience in web application development. My
+                    expertise lies in PHP and I am also adept in Laravel, Node.js, and Typescript.
+                </p>
+                <p class="text-slate-600 dark:text-gray-300 text-lg leading-relaxed">
+                    I specialize in developing RESTful APIs and implementing them on the frontend side. I have extensive
+                    experience with Digital Ocean and Docker implementation, ensuring robust and scalable solutions.
+                </p>
+            </div>
+        </section>
+        <section class="reveal-section w-full max-w-[960px] px-4 sm:px-10 py-16 scroll-mt-20" id="experience">
+            <h2 class="text-2xl md:text-3xl font-bold mb-10 border-l-4 border-primary pl-4">Experience</h2>
+            <div class="relative border-l-2 border-gray-200 dark:border-gray-700 ml-3 space-y-12">
+                <div class="relative ml-8 group">
+                    <span
+                        class="absolute -left-[41px] top-7 flex items-center justify-center size-6 rounded-full bg-background-light dark:bg-background-dark border-2 border-primary z-10">
+                        <div class="size-2 rounded-full bg-primary"></div>
+                    </span>
+                    <div
+                        class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-xl hover:border-primary/50 hover:-translate-y-1 transition-all duration-300">
+                        <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Back End Developer</h3>
+                            <span
+                                class="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full w-fit mt-1 sm:mt-0">July
+                                2021 - Present</span>
+                        </div>
+                        <p class="text-base font-medium text-slate-500 dark:text-gray-400 mb-4">KapanLagi Youniverse</p>
+                        <div class="text-slate-600 dark:text-gray-300 leading-relaxed">
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li>Designing and creating an optimal RESTful API that allows communication between the
+                                    server and the front-end of the application.</li>
+                                <li>Implementing security measures to protect user data and applications from potential
+                                    threats.</li>
+                                <li>Working with front-end developers to ensure that the application functions properly
+                                    across platforms (liputan6.com, merdeka.com).</li>
+                                <li>Optimizing servers and databases to minimize loading times and improve user
+                                    experience.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative ml-8 group">
+                    <span
+                        class="absolute -left-[41px] top-7 flex items-center justify-center size-6 rounded-full bg-background-light dark:bg-background-dark border-2 border-gray-300 dark:border-gray-600 group-hover:border-primary transition-colors z-10">
+                        <div
+                            class="size-2 rounded-full bg-gray-400 dark:bg-gray-500 group-hover:bg-primary transition-colors">
+                        </div>
+                    </span>
+                    <div
+                        class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-xl hover:border-primary/50 hover:-translate-y-1 transition-all duration-300">
+                        <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Web Developer</h3>
+                            <span
+                                class="text-sm font-medium text-slate-500 dark:text-gray-400 bg-gray-100 dark:bg-white/5 px-3 py-1 rounded-full w-fit mt-1 sm:mt-0">May
+                                2020 - May 2021</span>
+                        </div>
+                        <p class="text-base font-medium text-slate-500 dark:text-gray-400 mb-4">PT. Global Informatika
+                            Indonesia</p>
+                        <div class="text-slate-600 dark:text-gray-300 leading-relaxed">
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li>Creating new features and maintaining websites using agile methodologies like scrum.
+                                </li>
+                                <li>Creating visual elements of the website that interact directly with users, such as
+                                    buttons, forms, and navigation.</li>
+                                <li>Created a CMS (Content Management System) with responsive UI/UX.</li>
+                                <li>Communicating with the server to retrieve data and display information on web pages
+                                    using technologies such as AJAX or Fetch API.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative ml-8 group">
+                    <span
+                        class="absolute -left-[41px] top-7 flex items-center justify-center size-6 rounded-full bg-background-light dark:bg-background-dark border-2 border-gray-300 dark:border-gray-600 group-hover:border-primary transition-colors z-10">
+                        <div
+                            class="size-2 rounded-full bg-gray-400 dark:bg-gray-500 group-hover:bg-primary transition-colors">
+                        </div>
+                    </span>
+                    <div
+                        class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-xl hover:border-primary/50 hover:-translate-y-1 transition-all duration-300">
+                        <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Webmaster</h3>
+                            <span
+                                class="text-sm font-medium text-slate-500 dark:text-gray-400 bg-gray-100 dark:bg-white/5 px-3 py-1 rounded-full w-fit mt-1 sm:mt-0">Jan
+                                2020 - Apr 2020</span>
+                        </div>
+                        <p class="text-base font-medium text-slate-500 dark:text-gray-400 mb-4">Kacangan Clinic</p>
+                        <div class="text-slate-600 dark:text-gray-300 leading-relaxed">
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li>Ensuring the website is running smoothly by regularly updating content, including
+                                    text, images, videos, and other elements.</li>
+                                <li>Maintaining the security of the website and troubleshooting any issues that may
+                                    arise.</li>
+                                <li>Implemented admin features that are directly integrated with the cashier and
+                                    automatic patient calling systems.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="reveal-section w-full max-w-[960px] px-4 sm:px-10 py-16 scroll-mt-20" id="freelance">
+            <h2 class="text-2xl md:text-3xl font-bold mb-10 border-l-4 border-primary pl-4">Freelance Projects</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div
+                    class="flex flex-col bg-surface-light dark:bg-surface-dark rounded-xl p-6 shadow-sm hover:shadow-xl border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300 h-full">
+                    <div class="flex justify-between items-start mb-4 gap-2 min-h-[4rem]">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Monev PPG Lamkot</h3>
+                        <span
+                            class="inline-flex items-center rounded-md bg-green-100 dark:bg-green-900/40 px-2.5 py-1 text-xs font-medium text-green-800 dark:text-green-300 border border-green-200 dark:border-green-800 whitespace-nowrap">Completed</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed mb-6 flex-grow min-h-[6rem]">
+                        <span class="font-bold text-primary">Full Stack Developer</span> - Developed a monitoring and
+                        evaluation system for regional programs, focusing on data visualization and reporting.
+                    </p>
+                    <a class="inline-flex items-center justify-center px-4 py-2 text-sm font-bold text-white btn-gradient rounded-lg hover:opacity-90 transition-all duration-300 w-full mt-auto"
+                        href="https://monev.ppglamkot.com" target="_blank">
+                        Visit Website
+                        <span class="material-symbols-outlined text-sm ml-2">open_in_new</span>
+                    </a>
+                </div>
+                <div
+                    class="flex flex-col bg-surface-light dark:bg-surface-dark rounded-xl p-6 shadow-sm hover:shadow-xl border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300 h-full">
+                    <div class="flex justify-between items-start mb-4 gap-2 min-h-[4rem]">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Aisyah Flash Delivery</h3>
+                        <span
+                            class="inline-flex items-center rounded-md bg-green-100 dark:bg-green-900/40 px-2.5 py-1 text-xs font-medium text-green-800 dark:text-green-300 border border-green-200 dark:border-green-800 whitespace-nowrap">Completed</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed mb-6 flex-grow min-h-[6rem]">
+                        <span class="font-bold text-primary">Full Stack Developer</span> - Built a real-time delivery
+                        tracking platform with an integrated management dashboard for logistics optimization.
+                    </p>
+                    <a class="inline-flex items-center justify-center px-4 py-2 text-sm font-bold text-white btn-gradient rounded-lg hover:opacity-90 transition-all duration-300 w-full mt-auto"
+                        href="https://aisyahflashdelivery.com" target="_blank">
+                        Visit Website
+                        <span class="material-symbols-outlined text-sm ml-2">open_in_new</span>
+                    </a>
+                </div>
+                <div
+                    class="flex flex-col bg-surface-light dark:bg-surface-dark rounded-xl p-6 shadow-sm hover:shadow-xl border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300 h-full">
+                    <div class="flex justify-between items-start mb-4 gap-2 min-h-[4rem]">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Jamus Project</h3>
+                        <span
+                            class="inline-flex items-center rounded-md bg-yellow-100 dark:bg-yellow-900/40 px-2.5 py-1 text-xs font-medium text-yellow-800 dark:text-yellow-300 border border-yellow-200 dark:border-yellow-800 whitespace-nowrap">Ongoing</span>
+                    </div>
+                    <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed mb-6 flex-grow min-h-[6rem]">
+                        <span class="font-bold text-primary">Lead Developer</span> - Architecting and developing a
+                        comprehensive web solution for community management and digital services.
+                    </p>
+                    <a class="inline-flex items-center justify-center px-4 py-2 text-sm font-bold text-white btn-gradient rounded-lg hover:opacity-90 transition-all duration-300 w-full mt-auto"
+                        href="https://jamus.sultanmaula.my.id" target="_blank">
+                        Visit Website
+                        <span class="material-symbols-outlined text-sm ml-2">open_in_new</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <section class="reveal-section w-full max-w-[960px] px-4 sm:px-10 py-16 scroll-mt-20" id="skills">
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 border-l-4 border-primary pl-4">Skills</h2>
+            <div class="space-y-8">
+                <div>
+                    <h3
+                        class="text-lg font-semibold text-slate-500 dark:text-gray-400 mb-4 uppercase tracking-wider text-sm">
+                        Languages</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-php-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">PHP</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-javascript-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Javascript</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-nodejs-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Node.js</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-typescript-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Typescript</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-python-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Python</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3
+                        class="text-lg font-semibold text-slate-500 dark:text-gray-400 mb-4 uppercase tracking-wider text-sm">
+                        Databases</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-postgresql-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">PostgreSQL</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-mysql-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">MySQL</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-redis-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Redis</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-mongodb-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">MongoDB</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-elasticsearch-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Elasticsearch</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3
+                        class="text-lg font-semibold text-slate-500 dark:text-gray-400 mb-4 uppercase tracking-wider text-sm">
+                        Frameworks</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-laravel-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Laravel</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-filamentphp-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Laravel Filament</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-inertiajs-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Inertia.js</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-nextjs-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Next.js</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-vuejs-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Vue.js</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-codeigniter-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Codeigniter</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-express-original text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Express</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-react-original text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">React</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-tailwindcss-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Tailwind CSS</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-bootstrap-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Bootstrap</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3
+                        class="text-lg font-semibold text-slate-500 dark:text-gray-400 mb-4 uppercase tracking-wider text-sm">
+                        DevOps &amp; Tools</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-docker-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Docker</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-linux-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Linux</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-githubactions-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">GitHub Actions</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-nginx-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">NGINX</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-apache-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Apache</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-postman-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Postman</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-dbeaver-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">DBeaver</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-digitalocean-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">DigitalOcean</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-amazonwebservices-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm text-center">Amazon Web Service</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-googlecloud-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Google Cloud</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-jenkins-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Jenkins</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-jira-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Jira</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-github-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">GitHub</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-gitlab-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">GitLab</span>
+                        </div>
+                        <div
+                            class="flex flex-col items-center justify-center gap-3 p-4 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 shadow-sm group">
+                            <i
+                                class="devicon-bitbucket-plain text-4xl text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors"></i>
+                            <span class="font-medium text-sm">Bitbucket</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="reveal-section w-full max-w-[960px] px-4 sm:px-10 py-16 scroll-mt-20" id="achievements">
+            <div class="flex flex-col gap-12">
+                <div class="flex flex-col gap-8">
+                    <h2 class="text-2xl md:text-3xl font-bold border-l-4 border-primary pl-4">Achievements</h2>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div
+                            class="p-6 rounded-xl bg-surface-light dark:bg-surface-dark shadow-sm border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="material-symbols-outlined text-yellow-500 text-3xl">psychology</span>
+                                <h3 class="font-bold text-lg leading-tight">AI Feature Development</h3>
+                            </div>
+                            <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed">
+                                Achieved target by completing AI feature development for KapanLagi Youniverse admin
+                                panel before deadline.
+                            </p>
+                        </div>
+                        <div
+                            class="p-6 rounded-xl bg-surface-light dark:bg-surface-dark shadow-sm border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="material-symbols-outlined text-green-400 text-3xl">bug_report</span>
+                                <h3 class="font-bold text-lg leading-tight">Critical Bug Resolution</h3>
+                            </div>
+                            <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed">
+                                Resolved critical bugs and errors in KapanLagi Youniverse admin panel ensuring system
+                                stability.
+                            </p>
+                        </div>
+                        <div
+                            class="p-6 rounded-xl bg-surface-light dark:bg-surface-dark shadow-sm border border-gray-200 dark:border-white/5 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span
+                                    class="material-symbols-outlined text-primary text-3xl">admin_panel_settings</span>
+                                <h3 class="font-bold text-lg leading-tight">Scalable Admin Panels</h3>
+                            </div>
+                            <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed">
+                                Designed and developed scalable admin panels for managing large-scale data systems and
+                                user interactions.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section
+            class="reveal-section w-full bg-surface-light dark:bg-[#1a0c1a] border-t border-gray-200 dark:border-[#392839] mt-10 scroll-mt-20"
+            id="contact">
+            <div class="max-w-[960px] mx-auto px-4 sm:px-10 py-20 text-center">
+                <h2 class="text-3xl md:text-4xl font-black mb-6">Let's Work Together</h2>
+                <p class="text-slate-600 dark:text-gray-300 text-lg max-w-2xl mx-auto mb-10">
+                    I'm currently available for freelance projects and open to new opportunities. If you have a project
+                    in mind, let's chat.
+                </p>
+                <div class="flex flex-col items-center gap-8">
+                    <a class="flex items-center gap-2 text-2xl font-bold hover:text-primary transition-colors"
+                        href="mailto:sultanmaulachamzah@gmail.com">
+                        <span class="material-symbols-outlined text-3xl">mail</span>
+                        sultanmaulachamzah@gmail.com
+                    </a>
+                    <div class="flex gap-6">
+                        <a target="_blank"
+                            class="w-14 h-14 flex items-center justify-center rounded-full bg-background-light dark:bg-background-dark text-slate-900 dark:text-white hover:bg-primary hover:text-white transition-all duration-300 shadow-md"
+                            href="https://www.linkedin.com/in/sultanmaula">
+                            <i class="devicon-linkedin-plain text-2xl block"></i>
+                        </a>
+                        <a target="_blank"
+                            class="w-14 h-14 flex items-center justify-center rounded-full bg-background-light dark:bg-background-dark text-slate-900 dark:text-white hover:bg-primary hover:text-white transition-all duration-300 shadow-md"
+                            href="https://www.github.com/sultanmaula">
+                            <i class="devicon-github-plain text-2xl block"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <footer class="w-full py-6 text-center border-t border-gray-200 dark:border-[#392839]">
+                <p class="text-slate-500 dark:text-gray-500 text-sm">
+                    &copy; <span id="year"></span> Sultan Maula Chamzah. All rights reserved.
+                </p>
+            </footer>
+        </section>
+    </main>
+    <script>
+        // make year dynamic
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-        <!-- Script: Sembunyikan skeleton & tampilkan konten -->
-        <script>
-            setTimeout(() => {
-                // Sembunyikan skeleton
-                document.getElementById('skeleton').style.display = 'none';
-                
-                // Tampilkan konten dan footer dengan fade-in
-                const content = document.getElementById('content');
-                const footer = document.getElementById('footer');
-                
-                content.classList.remove('hidden');
-                footer.classList.remove('hidden');
-                
-                // Beri jeda kecil agar transisi opacity bekerja
-                setTimeout(() => {
-                    content.style.opacity = 1;
-                    footer.style.opacity = 1;
-                }, 10);
-            }, 1500); // Durasi loading 1.5 detik
-
-            // Update tahun saat ini di footer
-            document.addEventListener('DOMContentLoaded', function() {
-                var currentYear = new Date().getFullYear();
-                document.getElementById('current-year').textContent = currentYear;
+        const toggleButton = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        const iconElement = toggleButton.querySelector('.material-symbols-outlined');
+        toggleButton.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            if (htmlElement.classList.contains('dark')) {
+                iconElement.textContent = 'light_mode';
+            } else {
+                iconElement.textContent = 'dark_mode';
+            }
+        });
+        // Intersection Observer for scroll reveal animations
+        document.addEventListener("DOMContentLoaded", function () {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            const sections = document.querySelectorAll('.reveal-section');
+            sections.forEach(section => {
+                observer.observe(section);
             });
-        </script>
-    </body>
+        });
+    </script>
+</body>
+
 </html>
