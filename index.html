@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="dark" lang="en">
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
@@ -13,6 +13,14 @@
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" rel="stylesheet" />
+    <script>
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
         tailwind.config = {
@@ -653,13 +661,28 @@
         const toggleButton = document.getElementById('theme-toggle');
         const htmlElement = document.documentElement;
         const iconElement = toggleButton.querySelector('.material-symbols-outlined');
-        toggleButton.addEventListener('click', () => {
-            htmlElement.classList.toggle('dark');
+
+        function updateIcon() {
             if (htmlElement.classList.contains('dark')) {
                 iconElement.textContent = 'light_mode';
             } else {
                 iconElement.textContent = 'dark_mode';
             }
+        }
+
+        // Initialize icon state
+        updateIcon();
+
+        toggleButton.addEventListener('click', () => {
+            // toggle color state
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+            updateIcon();
         });
         // Intersection Observer for scroll reveal animations
         document.addEventListener("DOMContentLoaded", function () {
