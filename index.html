@@ -121,6 +121,16 @@
             opacity: 1;
             transform: translateY(0);
         }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .typing-cursor::after {
+            content: '|';
+            margin-left: 2px;
+            color: #f20df2;
+            animation: blink 0.7s infinite;
+        }
     </style>
 </head>
 
@@ -197,8 +207,8 @@
                 <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-tight tracking-[-0.033em]">
                     <span class="text-gradient">Sultan Maula Chamzah</span>
                 </h1>
-                <h2 class="text-2xl md:text-3xl font-bold text-slate-800 dark:text-gray-200">
-                    Full Stack Developer
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800 dark:text-gray-200 min-h-[1.5em] flex items-center justify-center">
+                    <span class="typing-cursor" id="typing-text"></span>
                 </h2>
                 <div class="flex items-center justify-center gap-2 text-slate-500 dark:text-gray-400 font-medium">
                     <span class="material-symbols-outlined text-[20px]">location_on</span>
@@ -782,6 +792,36 @@
             sections.forEach(section => {
                 observer.observe(section);
             });
+
+            // Typing animation effect
+            const typingText = document.getElementById('typing-text');
+            const roles = ['Back-End Engineer', 'Software Engineer', 'Laravel Specialist', 'Full Stack Developer'];
+            let roleIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let typeSpeed = 100;
+            function type() {
+                const currentRole = roles[roleIndex];
+                if (isDeleting) {
+                    typingText.textContent = currentRole.substring(0, charIndex - 1);
+                    charIndex--;
+                    typeSpeed = 50;
+                } else {
+                    typingText.textContent = currentRole.substring(0, charIndex + 1);
+                    charIndex++;
+                    typeSpeed = 100;
+                }
+                if (!isDeleting && charIndex === currentRole.length) {
+                    isDeleting = true;
+                    typeSpeed = 2000; // Pause at end
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    roleIndex = (roleIndex + 1) % roles.length;
+                    typeSpeed = 500; // Pause before next
+                }
+                setTimeout(type, typeSpeed);
+            }
+            type();
         });
     </script>
 </body>
